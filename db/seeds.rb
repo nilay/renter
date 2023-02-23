@@ -15,7 +15,7 @@ UnitType.all.each do |ut|
   10.times do |index|
     ut.units.create({
                       unit_no: "Unit#{ut.id}#{index}",
-                      monthly_rental_amount: rand(1200..70000),
+                      monthly_rental_amount: rand(120..700),
                       sql_meter: rand(850..2000),
                       status: :vacant,
                       year_built: rand(1990..2021).to_s
@@ -30,7 +30,10 @@ User.role.values.each do |role|
                   last_name: Faker::Name.last_name,
                   email: "#{role}#{index}@renter.com",
                   password: 'password',
-                  role: role
+                  role: role,
+                  address: Faker::Address.street_address,
+                  city: Faker::Address.city
+
                 })
   end
 end

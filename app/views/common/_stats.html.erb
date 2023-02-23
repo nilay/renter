@@ -4,10 +4,10 @@
       <div class="widget-content-wrapper text-white">
         <div class="widget-content-left">
           <div class="widget-heading">Total Units</div>
-          <div class="widget-subheading">Vacant: 1200</div>
+          <div class="widget-subheading">Vacant: <%= @stats[:vacant_unit_count]%></div>
         </div>
         <div class="widget-content-right">
-          <div class="widget-numbers text-white"><span>1896</span></div>
+          <div class="widget-numbers text-white"><span><%= @stats[:unit_count]%></span></div>
         </div>
       </div>
     </div>
@@ -17,10 +17,10 @@
       <div class="widget-content-wrapper text-white">
         <div class="widget-content-left">
           <div class="widget-heading">Leases</div>
-          <div class="widget-subheading">Running: 233</div>
+          <div class="widget-subheading">Running: <%= @stats[:running_lease_count]%></div>
         </div>
         <div class="widget-content-right">
-          <div class="widget-numbers text-white"><span>568</span></div>
+          <div class="widget-numbers text-white"><span><%= @stats[:lease_count]%></span></div>
         </div>
       </div>
     </div>
@@ -30,10 +30,10 @@
       <div class="widget-content-wrapper text-white">
         <div class="widget-content-left">
           <div class="widget-heading">Invoices</div>
-          <div class="widget-subheading">Due: $9877</div>
+          <div class="widget-subheading">Due: $<%= @stats[:due_invoice_amount].round(2) %>9877</div>
         </div>
         <div class="widget-content-right">
-          <div class="widget-numbers text-white"><span>$ 978767</span></div>
+          <div class="widget-numbers text-white"><span>$<%= @stats[:invoice_amount].round(2) %></span></div>
         </div>
       </div>
     </div>
@@ -43,10 +43,10 @@
       <div class="widget-content-wrapper text-white">
         <div class="widget-content-left">
           <div class="widget-heading">Appointments</div>
-          <div class="widget-subheading">This Week: 63</div>
+          <div class="widget-subheading">This Week: <%= @stats[:appointment_count]%></div>
         </div>
         <div class="widget-content-right">
-          <div class="widget-numbers text-warning"><span>3560</span></div>
+          <div class="widget-numbers text-warning"><span><%= @stats[:this_week_appointments]%></span></div>
         </div>
       </div>
     </div>

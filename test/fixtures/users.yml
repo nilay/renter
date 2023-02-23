@@ -3,6 +3,8 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  address                :string(255)
+#  city                   :string(255)
 #  email                  :string(255)      not null
 #  encrypted_password     :string(255)      not null
 #  first_name             :string(255)      not null

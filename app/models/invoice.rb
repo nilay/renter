@@ -24,8 +24,16 @@
 #  fk_rails_...  (lease_id => leases.id)
 #
 class Invoice < ApplicationRecord
+  extend Enumerize
+
   belongs_to :lease
   has_many :invoice_items
+  enumerize :status, in: {
+    unpaid: 1,
+    paid: 2,
+    cancelled: 3
+  }, default: 1, scope: true
 
   accepts_nested_attributes_for :invoice_items
+
 end

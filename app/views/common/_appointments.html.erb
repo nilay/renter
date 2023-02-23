@@ -2,6 +2,7 @@
   <div class="col-md-12">
     <div class="main-card mb-3 card">
       <div class="card-header">Appointments
+        <button class="btn btn-primary" style="margin-left: 20px;">New Appointment</button>
         <div class="btn-actions-pane-right">
           <div role="group" class="btn-group-sm btn-group">
             <button class="active btn btn-focus">Last Week</button>
@@ -15,115 +16,97 @@
           <tr>
             <th class="text-center">#</th>
             <th>Name</th>
-            <th class="text-center">City</th>
+            <th class="text-center">Unit</th>
+            <th class="text-center">When</th>
             <th class="text-center">Status</th>
             <th class="text-center">Actions</th>
           </tr>
           </thead>
           <tbody>
+
+          <% @appointments.each do |appointment| %>
+
           <tr>
-            <td class="text-center text-muted">#345</td>
+            <td class="text-center text-muted">#<%=appointment.id %></td>
             <td>
               <div class="widget-content p-0">
                 <div class="widget-content-wrapper">
-                  <div class="widget-content-left mr-3">
-                    <div class="widget-content-left">
-                      <img width="40" class="rounded-circle" src="assets/images/avatars/4.jpg" alt="">
-                    </div>
-                  </div>
                   <div class="widget-content-left flex2">
-                    <div class="widget-heading">John Doe</div>
-                    <div class="widget-subheading opacity-7">Web Developer</div>
+                    <div class="widget-heading"><%= appointment.user.name %></div>
+                    <div class="widget-subheading opacity-7"><%= appointment.user.address %></div>
                   </div>
                 </div>
               </div>
             </td>
-            <td class="text-center">Madrid</td>
             <td class="text-center">
-              <div class="badge badge-warning">Pending</div>
+              <div class="widget-content p-0">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left flex2">
+                    <div class="widget-heading"><%= appointment.unit.unit_no %></div>
+                    <div class="widget-subheading opacity-7"><%= appointment.unit.unit_type.name %></div>
+                  </div>
+                </div>
+              </div>
+
+            </td>
+            <td class="text-center"><%= appointment.datetime.strftime("%A, %-d %b at %I:%M %p") %></td>
+            <td class="text-center">
+              <div class="badge badge-warning"><%= appointment.status %></div>
             </td>
             <td class="text-center">
               <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Details</button>
             </td>
           </tr>
-          <tr>
-            <td class="text-center text-muted">#347</td>
-            <td>
-              <div class="widget-content p-0">
-                <div class="widget-content-wrapper">
-                  <div class="widget-content-left mr-3">
-                    <div class="widget-content-left">
-                      <img width="40" class="rounded-circle" src="assets/images/avatars/3.jpg" alt="">
-                    </div>
-                  </div>
-                  <div class="widget-content-left flex2">
-                    <div class="widget-heading">Ruben Tillman</div>
-                    <div class="widget-subheading opacity-7">Etiam sit amet orci eget</div>
-                  </div>
-                </div>
-              </div>
-            </td>
-            <td class="text-center">Berlin</td>
-            <td class="text-center">
-              <div class="badge badge-success">Completed</div>
-            </td>
-            <td class="text-center">
-              <button type="button" id="PopoverCustomT-2" class="btn btn-primary btn-sm">Details</button>
-            </td>
-          </tr>
-          <tr>
-            <td class="text-center text-muted">#321</td>
-            <td>
-              <div class="widget-content p-0">
-                <div class="widget-content-wrapper">
-                  <div class="widget-content-left mr-3">
-                    <div class="widget-content-left">
-                      <img width="40" class="rounded-circle" src="assets/images/avatars/2.jpg" alt="">
-                    </div>
-                  </div>
-                  <div class="widget-content-left flex2">
-                    <div class="widget-heading">Elliot Huber</div>
-                    <div class="widget-subheading opacity-7">Lorem ipsum dolor sic</div>
-                  </div>
-                </div>
-              </div>
-            </td>
-            <td class="text-center">London</td>
-            <td class="text-center">
-              <div class="badge badge-danger">In Progress</div>
-            </td>
-            <td class="text-center">
-              <button type="button" id="PopoverCustomT-3" class="btn btn-primary btn-sm">Details</button>
-            </td>
-          </tr>
-          <tr>
-            <td class="text-center text-muted">#55</td>
-            <td>
-              <div class="widget-content p-0">
-                <div class="widget-content-wrapper">
-                  <div class="widget-content-left mr-3">
-                    <div class="widget-content-left">
-                      <img width="40" class="rounded-circle" src="assets/images/avatars/1.jpg" alt=""></div>
-                  </div>
-                  <div class="widget-content-left flex2">
-                    <div class="widget-heading">Vinnie Wagstaff</div>
-                    <div class="widget-subheading opacity-7">UI Designer</div>
-                  </div>
-                </div>
-              </div>
-            </td>
-            <td class="text-center">Amsterdam</td>
-            <td class="text-center">
-              <div class="badge badge-info">On Hold</div>
-            </td>
-            <td class="text-center">
-              <button type="button" id="PopoverCustomT-4" class="btn btn-primary btn-sm">Details</button>
-            </td>
-          </tr>
+          <% end %>
           </tbody>
         </table>
       </div>
 
     </div>
   </div>
+
+<div class="row m-md-5 m-3 ">
+        <div class="col-lg-4 bg-blue py-5 px-5">
+            <div class="row">
+            </div>
+        </div>
+        <div class="col-lg-4 bg-red py-5 px-5">
+            <form action="">
+                <h4 class="text-center text-white mb-4">Make An Appointment</h4>
+                <div class="row">
+                    <div class="col-md-6 col-12 my-md-0 my-2">
+                        <input type="text" class="form-control bg-darkred" placeholder="First Name"style="color: white important;">
+                    </div>
+                    <div class="col-md-6 col-12 my-md-0 my-2 ">
+                        <input type="text" class="form-control bg-darkred" placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-12 my-2">
+                        <input type="email" class="form-control bg-darkred" placeholder="Email">
+                    </div>
+                    <div class="col-md-6 col-12 my-2">
+                        <select name="" id="dropDown" class="form-control bg-darkred shadow-none">
+                            <option value="" hidden selected>Units</option>
+                            <option value="service 1">Service 1</option>
+                            <option value="service 1">Service 2</option>
+                            <option value="service 1">Service 3</option>
+                        </select>
+                    </div>
+                    <div class=" col-lg-4 col-md-5 offset-lg-0 offset-md-2 col-4">
+                    <p class="fw-bold">DateTime:</p>
+                   </div>
+                   <div class=" col-lg-4 col-md-5 offset-lg-0 offset-md-2 col-4">
+                    <p class="fw-bold">Location:</p>
+                   </div>
+                    <div class="">
+                        <textarea cols="10" rows="3" class="form-control bg-darkred shadow-none"
+                            placeholder="Notes"></textarea>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+  
 </div>

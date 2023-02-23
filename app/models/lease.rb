@@ -35,5 +35,5 @@ class Lease < ApplicationRecord
   enumerize :status, in: {
     running: 1,
     expired: 2
-  }, default: :running
+  }, default: :running, scope: true
 end
