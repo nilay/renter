@@ -44,3 +44,12 @@ end
                  to_date: "#{rand(2023..2025)}-#{rand(1..12)}-#{rand(1..28)}"
                })
 end
+
+20.times do |index|
+  Appointment.create({
+                       unit: Unit.with_status(:vacant).order('RAND()').first,
+                       user: User.with_role(:renter).order('RAND()').first,
+                       datetime: Time.now + rand(7..18).day,
+                       note: Faker::Quotes::Rajnikanth.joke
+                     })
+end

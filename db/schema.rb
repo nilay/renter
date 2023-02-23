@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_23_073314) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_23_114936) do
+  create_table "appointments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "unit_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "datetime"
+    t.text "note"
+    t.integer "status"
+    t.integer "interest_level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unit_id"], name: "index_appointments_on_unit_id"
+    t.index ["user_id"], name: "index_appointments_on_user_id"
+  end
+
   create_table "invoice_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "invoice_id", null: false
     t.integer "item_type"
@@ -90,6 +103,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_23_073314) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "appointments", "units"
+  add_foreign_key "appointments", "users"
   add_foreign_key "invoice_items", "invoices"
   add_foreign_key "invoices", "leases"
   add_foreign_key "leases", "units"

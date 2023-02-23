@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: cadetblue;">
   <div class="container-fluid">
     <a href="#" class="navbar-brand">
       <img src="/logo.png" height="28" alt="Rental">
@@ -9,12 +9,30 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <div class="navbar-nav">
         <a href="#" class="nav-item nav-link active">Home</a>
-        <a href="#" class="nav-item nav-link">Profile</a>
-        <a href="#" class="nav-item nav-link">Messages</a>
-        <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a>
+        <a href="#" class="nav-item nav-link">Units</a>
+        <a href="#" class="nav-item nav-link">Leasings</a>
+        <a href="#" class="nav-item nav-link" tabindex="-1">Invoices</a>
       </div>
       <div class="navbar-nav ms-auto">
-        <a href="#" class="nav-item nav-link">Login</a>
+
+        <!-- Icons -->
+        <ul class="navbar-nav d-flex flex-row me-1">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               <%= current_user.name %>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li>
+                <%= button_to( "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item" ) %>
+              </li>
+            </ul>
+          </li>
+
+
+
+        </ul>
+
       </div>
     </div>
   </div>
