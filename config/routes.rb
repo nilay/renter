@@ -11,14 +11,15 @@ Rails.application.routes.draw do
   end
 
   namespace :manager do
-    root to: "dashboard#index"
+    root to: 'dashboard#index'
+    resources :leads, only: %i[create show]
   end
 
   namespace :receptionist do
-    root to: "dashboard#index"
+    root to: 'dashboard#index'
   end
 
   namespace :renter do
-    root to: "dashboard#index"
+    root to: 'dashboard#index'
   end
 end

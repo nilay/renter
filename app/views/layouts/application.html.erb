@@ -16,12 +16,14 @@
     <%= render partial: '/nav', formats: :html %>
   <% end %>
 
+  <div class="container container-fluid" style="margin-top:20px">
   <% if notice.present? %>
-    <p class="alert alert-primary"><%= notice %></p>
+    <div class="row"><div class="col-md-12"><p class="alert alert-primary"><%= notice %></p></div> </div>
   <% end %>
   <% if alert.present? %>
-    <p class="alert alert-danger"><%= alert %></p>
+    <div class="row"><div class="col-md-12"><p class="alert alert-danger"><%= alert %></p></div> </div>
   <% end %>
     <%= yield %>
+  </div>
   </body>
 </html>

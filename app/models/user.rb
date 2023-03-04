@@ -35,6 +35,10 @@ class User < ApplicationRecord
     renter: 3
   }, scope: true
 
+  has_one :appointment
+  accepts_nested_attributes_for :appointment
+
+
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :first_name, :last_name, presence: true
 

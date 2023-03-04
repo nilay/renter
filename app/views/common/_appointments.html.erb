@@ -1,8 +1,11 @@
 <div class="row">
   <div class="col-md-12">
     <div class="main-card mb-3 card">
-      <div class="card-header">Appointments
-        <button class="btn btn-primary" style="margin-left: 20px;">New Appointment</button>
+      <div class="card-header">Appointments &nbsp;
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          New Appointment
+        </button>
         <div class="btn-actions-pane-right">
           <div role="group" class="btn-group-sm btn-group">
             <button class="active btn btn-focus">Last Week</button>
@@ -49,12 +52,12 @@
               </div>
 
             </td>
-            <td class="text-center"><%= appointment.datetime.strftime("%A, %-d %b at %I:%M %p") %></td>
+            <td class="text-center"><%= appointment.datetime.strftime("%A, %-d %b at %I:%M %p") if appointment.datetime.present?  %></td>
             <td class="text-center">
               <div class="badge badge-warning"><%= appointment.status %></div>
             </td>
             <td class="text-center">
-              <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Details</button>
+              <a href="<%= manager_lead_path(appointment) %>"><button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Details</button></a>
             </td>
           </tr>
           <% end %>
@@ -65,48 +68,4 @@
     </div>
   </div>
 
-<div class="row m-md-5 m-3 ">
-        <div class="col-lg-4 bg-blue py-5 px-5">
-            <div class="row">
-            </div>
-        </div>
-        <div class="col-lg-4 bg-red py-5 px-5">
-            <form action="">
-                <h4 class="text-center text-white mb-4">Make An Appointment</h4>
-                <div class="row">
-                    <div class="col-md-6 col-12 my-md-0 my-2">
-                        <input type="text" class="form-control bg-darkred" placeholder="First Name"style="color: white important;">
-                    </div>
-                    <div class="col-md-6 col-12 my-md-0 my-2 ">
-                        <input type="text" class="form-control bg-darkred" placeholder="Last Name">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-12 my-2">
-                        <input type="email" class="form-control bg-darkred" placeholder="Email">
-                    </div>
-                    <div class="col-md-6 col-12 my-2">
-                        <select name="" id="dropDown" class="form-control bg-darkred shadow-none">
-                            <option value="" hidden selected>Units</option>
-                            <option value="service 1">Service 1</option>
-                            <option value="service 1">Service 2</option>
-                            <option value="service 1">Service 3</option>
-                        </select>
-                    </div>
-                    <div class=" col-lg-4 col-md-5 offset-lg-0 offset-md-2 col-4">
-                    <p class="fw-bold">DateTime:</p>
-                   </div>
-                   <div class=" col-lg-4 col-md-5 offset-lg-0 offset-md-2 col-4">
-                    <p class="fw-bold">Location:</p>
-                   </div>
-                    <div class="">
-                        <textarea cols="10" rows="3" class="form-control bg-darkred shadow-none"
-                            placeholder="Notes"></textarea>
-                    </div>
-
-                </div>
-            </form>
-        </div>
-    </div>
-  
 </div>

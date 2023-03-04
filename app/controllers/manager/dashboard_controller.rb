@@ -2,7 +2,7 @@
 
 class Manager::DashboardController < Manager::BaseController
   def index
-    @appointments = Appointment.take(10)
+    @appointments = Appointment.order("id desc").take(10)
     @stats = ReportService.stats
   end
 end
