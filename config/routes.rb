@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   namespace :manager do
     root to: 'dashboard#index'
     resources :leads, only: %i[create show]
+    resources :leases, only: %i[index show create]
+    resources :units
+    resources :invoices
   end
 
   namespace :receptionist do

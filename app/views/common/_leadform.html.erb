@@ -1,0 +1,95 @@
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">New Lead/Appointment</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="liveAlertPlaceholder"></div>
+
+        <form id="lead_form" method="post" action="/manager/leads">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input name="lead[email]" type="email" class="form-control" id="input-email" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input name="lead[password]" type="password" class="form-control" id="input-password">
+          </div>
+
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input name="lead[first_name]" type="text" class="form-control" id="firstName">
+          </div>
+
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input name="lead[last_name]" type="text" class="form-control" id="lastName">
+          </div>
+
+          <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input name="lead[address]" type="text" class="form-control" id="address">
+          </div>
+
+          <div class="mb-3">
+            <label for="unit" class="form-label">Unit</label>
+            <select name="lead[appointment_attributes[unit_id]]" class="form-select" aria-label="Default select example">
+              <option selected>Select Unit</option>
+              <% Unit.all.each do |unit| %>
+                <option value="<%=unit.id%>"><%=unit.unit_no %></option>
+              <% end %>
+
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="when" class="form-label">When</label>
+            <input name="lead[appointment_attributes[datetime]]" type="text" class="form-control picker" id="when">
+          </div>
+
+        </form>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button onclick="submit()"  type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const alert = (elm, message, type) => {
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML = [
+        `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+        `   <div>${message}</div>`,
+        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+        '</div>'
+    ].join('')
+    elm.append(wrapper)
+  }
+  async function submit(){
+    let response;
+    response = await fetch("/manager/leads.json", {
+        body: new FormData(document.getElementById('lead_form')),
+        method: "post"
+    })
+    if (!response.ok) { response.json().then((data) => {
+        alert( document.getElementById('liveAlertPlaceholder'), data.message, 'danger')
+    })} else {
+        response.json().then((data) => {
+            let myModalEl = document.getElementById('staticBackdrop');
+            let modal = window.bootstrap.Modal.getInstance(myModalEl)
+            location.reload();
+            modal.hide();
+        })
+    }
+  }
+</script>
+

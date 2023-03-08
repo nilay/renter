@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="main-card mb-3 card">
+      <div class="card-header">Leasing &nbsp;
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          New Leases
+        </button>
+        <div class="btn-actions-pane-right">
+          <div role="group" class="btn-group-sm btn-group">
+            <button class="active btn btn-focus">Running</button>
+            <button class="btn btn-focus">Expired</button>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+          <thead>
+          <tr>
+            <th class="text-center">#</th>
+            <th>Tenant</th>
+            <th class="text-center">Unit</th>
+            <th class="text-center">Period</th>
+            <th class="text-center">Status</th>
+            <th class="text-center">Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <% @leases.each do |lease| %>
+
+            <tr>
+              <td class="text-center text-muted">#<%=lease.id %></td>
+              <td>
+                <div class="widget-content p-0">
+                  <div class="widget-content-wrapper">
+                    <div class="widget-content-left flex2">
+                      <div class="widget-heading"><%= lease.renter.name %></div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">
+                <div class="widget-content p-0">
+                  <div class="widget-content-wrapper">
+                    <div class="widget-content-left flex2">
+                      <div class="widget-heading"><%= lease.unit.unit_no %></div>
+                    </div>
+                  </div>
+                </div>
+
+              </td>
+              <td class="text-center">
+                <%= lease.from_date.strftime("%A, %-d %b") if lease.from_date.present? %>
+                &nbsp; to &nbsp;
+                <%= lease.to_date.strftime("%A, %-d %b") if lease.to_date.present? %>
+               </td>
+              <td class="text-center">
+                <div class="badge badge-warning"> <%= lease.status  %></div>
+              </td>
+              <td class="text-center">
+                <a href="<%= manager_lease_path(lease) %>"><button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Details</button></a>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+  <%= will_paginate @leases, renderer: BootstrapPagination::Rails %>
+</div>

@@ -1,8 +1,11 @@
 class ApplicationController < ActionController::Base
   skip_forgery_protection
 
+  def current_page
+    params[:page] || 1
+  end
+
   def after_sign_in_path_for(user)
-    puts "===========", user.email, "==============="
     case user
     when User.role.manager
       manager_root_path
